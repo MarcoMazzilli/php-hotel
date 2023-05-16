@@ -39,11 +39,10 @@ $hotels = [
     ],
 ];
 
-foreach ($hotels as $index => $hotel) {
-    # code...
-}
+// foreach ($hotels as $index => $hotel) {
+//     var_dump($hotel);
+// }
 
-// var_dump($hotels)
 
 ?>
 
@@ -62,6 +61,7 @@ foreach ($hotels as $index => $hotel) {
 
     <table class="table">
         <thead>
+
             <tr>
                 <?php foreach ($hotel as $key => $value) : ?>
                     <th><?php echo strtoupper($key) ?></th>
@@ -76,6 +76,9 @@ foreach ($hotels as $index => $hotel) {
                     <?php foreach ($hotel as $key => $value) : ?>
                         <td>
                             <?php
+                            if ($key === 'parking') {
+                                $value ? $value = 'Parcheggio disponibile' : $value = 'Parcheggio non disponibile';
+                            }
                                 echo $value;
                             ?>
                         </td>
