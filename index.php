@@ -39,7 +39,11 @@ $hotels = [
     ],
 ];
 
-var_dump($hotels)
+foreach ($hotels as $index => $hotel) {
+    # code...
+}
+
+// var_dump($hotels)
 
 ?>
 
@@ -56,15 +60,31 @@ var_dump($hotels)
 <body>
 <hr>
 
-<?php foreach ($hotels as $key => $hotel) : ?>
+    <table class="table">
+        <thead>
+            <tr>
+                <?php foreach ($hotel as $key => $value) : ?>
+                    <th><?php echo strtoupper($key) ?></th>
+                <?php endforeach; ?>
+            </tr>
+        </thead>
 
-    <ul><?php echo $key ?></ul>
+        <tbody>
 
-        <?php foreach ($hotel as $key => $value) : ?>
-            <li><?php echo $key . ':' . $value ?></li>
-        <?php endforeach ?>
+            <?php foreach ($hotels as $hotel) : ?>
+                <tr>
+                    <?php foreach ($hotel as $key => $value) : ?>
+                        <td>
+                            <?php
+                                echo $value;
+                            ?>
+                        </td>
+                    <?php endforeach ?>
+                </tr>
+            <?php endforeach; ?>
 
-    <?php endforeach ?>
+        </tbody>
+    </table>
 
 </body>
 </html>
