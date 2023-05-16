@@ -1,7 +1,6 @@
 <?php
 
 $hotels = [
-
     [
         'name' => 'Hotel Belvedere',
         'description' => 'Hotel Belvedere Descrizione',
@@ -39,9 +38,8 @@ $hotels = [
     ],
 ];
 
-// foreach ($hotels as $index => $hotel) {
-//     var_dump($hotel);
-// }
+foreach ($hotels as $index => $hotel) {
+}
 
 
 ?>
@@ -59,12 +57,15 @@ $hotels = [
 <body>
 <hr>
 
+
+<h1>2222</h1>
+
     <table class="table">
         <thead>
 
             <tr>
                 <?php foreach ($hotel as $key => $value) : ?>
-                    <th><?php echo strtoupper($key) ?></th>
+                    <th class="py-4"><?php echo mb_strtoupper($key) ?></th>
                 <?php endforeach; ?>
             </tr>
         </thead>
@@ -74,7 +75,7 @@ $hotels = [
             <?php foreach ($hotels as $hotel) : ?>
                 <tr>
                     <?php foreach ($hotel as $key => $value) : ?>
-                        <td>
+                        <td class="py-4">
                             <?php
                             if ($key === 'parking') {
                                 $value ? $value = 'Parcheggio disponibile' : $value = 'Parcheggio non disponibile';
