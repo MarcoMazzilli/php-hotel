@@ -38,8 +38,18 @@ $hotels = [
     ],
 ];
 
+$filter = $_POST['filter'] ?? 'all';
+$hotelsWithParking = [];
+
 foreach ($hotels as $index => $hotel) {
-}
+    foreach ($hotel as $key => $value) {
+        if ($key === 'parking') {
+            if($value === true){
+                array_push($hotelsWithParking, $hotel);
+            }
+        }
+    }
+};
 
 
 ?>
@@ -51,28 +61,43 @@ foreach ($hotels as $index => $hotel) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css' integrity='sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==' crossorigin='anonymous'/>
+    <link rel="shortcut icon" href="./assets/icons8-hotel-32.png" type="png">
     <title>Php hotel</title>
 </head>
 
 <body>
-<hr>
+    <div class="container text-center my-5">
 
+        <!-- FORM -->
+        <div class="row">
+            <div class="col col-5">
+                <form action="index.php" method="POST" class="d-flex">
+                    
+                    <select class="form-select" aria-label="Default select example" name="filter">
+                        <option value="all" selected>Tutti gli hotel</option>
+                        <option value="parkOnly">Solo hotel con il parcheggio</option>
+                    </select>
 
-<h1>2222</h1>
+                    <button type="submit" class="btn btn-success mx-3">Cerca</button>
+        
+                </form>
+            </div>
+        </div>
+        <!-- /FORM -->
 
-    <table class="table">
-        <thead>
-
-            <tr>
-                <?php foreach ($hotel as $key => $value) : ?>
-                    <th class="py-4"><?php echo mb_strtoupper($key) ?></th>
-                <?php endforeach; ?>
-            </tr>
-        </thead>
-
-        <tbody>
-
-            <?php foreach ($hotels as $hotel) : ?>
+        <table class="table">
+            <thead>
+                
+                <tr>
+                    <?php foreach($hotel as $i => $v) :?>
+                        <th class="py-4 text-uppercase"><?php echo $i ?></th>
+                    <?php endforeach; ?>
+                </tr>
+            </thead>
+                
+                <tbody>
+                    
+                    <?php foreach ($filter === 'all' ? $hotels : $hotelsWithParking as $hotel) : ?>
                 <tr>
                     <?php foreach ($hotel as $key => $value) : ?>
                         <td class="py-4">
@@ -80,15 +105,16 @@ foreach ($hotels as $index => $hotel) {
                             if ($key === 'parking') {
                                 $value ? $value = 'Parcheggio disponibile' : $value = 'Parcheggio non disponibile';
                             }
-                                echo $value;
+                            echo $value;
                             ?>
                         </td>
-                    <?php endforeach ?>
-                </tr>
-            <?php endforeach; ?>
-
-        </tbody>
-    </table>
-
+                        <?php endforeach ?>
+                    </tr>
+                    <?php endforeach; ?>
+                    
+                </tbody>
+            </table>
+            
+        </div>
 </body>
 </html>
